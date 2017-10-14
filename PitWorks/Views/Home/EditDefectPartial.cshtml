@@ -1,6 +1,6 @@
 ﻿@model PitWorks.Models.EditDefectModel
 
-<div class="modal-content" style="height:500px; width:1200px">
+<div class="modal-content" style="height:550px; width:1200px">
     <div class="modal-header">
         <button id="closeModal" class="close" data-dismiss="modal" area-hidden="true">X</button>
         <h4>Редактировать дефект</h4>
@@ -15,7 +15,13 @@
                 @Html.CheckBoxFor(m => m.status, Model.status)
             </div>
             <div class="row">
-                @*@Html.HiddenFor(model => model.defect.id)*@
+                @Html.HiddenFor(model => model.defect.id)
+                @Html.HiddenFor(model => model.defect.id_ВТД)
+                @Html.HiddenFor(model => model.defect.id_ДДО)
+                @Html.HiddenFor(model => model.defect.id_Ремонта)
+                @Html.HiddenFor(model => model.defect.id_объекта)
+                @Html.HiddenFor(model => model.defect.id_признак_состояния)
+
                 @Html.HiddenFor(model => model.objectID)
                  <div class="col-md-4">
                      <span><strong>Внутритрубная диагностиа</strong></span>         
@@ -30,23 +36,23 @@
                      </div>
                      <div class="form-group">
                          @Html.LabelFor(model => model.vtd.Длина_дефекта, "Длина дефекта", htmlAttributes: new { @class = "input-group-addon col-md-2", @style = "width:170px; line-height: inherit" })
-                         @Html.EditorFor(model => model.vtd.Длина_дефекта)
+                         @Html.EditorFor(model => model.vtd.Длина_дефекта, new { htmlAttributes = new { @class = "form-control", @style = "width:auto" } })
                      </div>
                     <div class="form-group">
-                        @Html.LabelFor(model => model.vtd.Ширина_дефекта, "Ширина дефекта")
-                        @Html.EditorFor(model => model.vtd.Ширина_дефекта)
+                        @Html.LabelFor(model => model.vtd.Ширина_дефекта, "Ширина дефекта", htmlAttributes: new { @class = "input-group-addon col-md-2", @style = "width:170px; line-height: inherit" })
+                        @Html.EditorFor(model => model.vtd.Ширина_дефекта, new { htmlAttributes = new { @class = "form-control", @style = "width:auto" } })
                     </div>
                     <p>
-                        @Html.LabelFor(model => model.vtd.Глубина_дефекта, "Глубина дефекта")
-                        @Html.EditorFor(model => model.vtd.Глубина_дефекта)
+                        @Html.LabelFor(model => model.vtd.Глубина_дефекта, "Глубина дефекта", htmlAttributes: new { @class = "input-group-addon col-md-2", @style = "width:170px; line-height: inherit" })
+                        @Html.EditorFor(model => model.vtd.Глубина_дефекта, new { htmlAttributes = new { @class = "form-control", @style = "width:auto" } })
                     </p>
                     <p>
-                        @Html.LabelFor(model => model.vtd.Срок_НО_по_ВТД, "Срок НО по ВТД")
-                        @Html.EditorFor(model => model.vtd.Срок_НО_по_ВТД)
+                        @Html.LabelFor(model => model.vtd.Срок_НО_по_ВТД, "Срок НО по ВТД", htmlAttributes: new { @class = "input-group-addon col-md-2", @style = "width:170px; line-height: inherit" })
+                        @Html.EditorFor(model => model.vtd.Срок_НО_по_ВТД, new { htmlAttributes = new { @class = "form-control", @style = "width:auto" } })
                     </p>
                     <p>
-                        @Html.LabelFor(model => model.vtd.Дата_проведения_ВТД, "Дата проведения ВТД")
-                        @Html.EditorFor(model => model.vtd.Дата_проведения_ВТД)
+                        @Html.LabelFor(model => model.vtd.Дата_проведения_ВТД, "Дата проведения ВТД", htmlAttributes: new { @class = "input-group-addon col-md-2", @style = "width:170px; line-height: inherit" })
+                        @Html.EditorFor(model => model.vtd.Дата_проведения_ВТД, new { htmlAttributes = new { @class = "form-control", @style = "width:auto" } })
                     </p>
                 </div>
 
@@ -54,32 +60,32 @@
                     <span><strong>Дополнительное диагностическое обследование</strong></span>
                     @Html.HiddenFor(model => model.ddo.id)
                     <p>
-                        @Html.LabelFor(model => model.ddo.Номер_МПР, "Номер МПР")
-                        @Html.EditorFor(model => model.ddo.Номер_МПР)
+                        @Html.LabelFor(model => model.ddo.Номер_МПР, "Номер МПР", htmlAttributes: new { @class = "input-group-addon col-md-2", @style = "width:170px; line-height: inherit" })
+                        @Html.EditorFor(model => model.ddo.Номер_МПР, new { htmlAttributes = new { @class = "form-control", @style = "width:auto" } })
                     </p>
                     <p>
-                        @Html.LabelFor(model => model.ddo.Номер_акта_НО, "Номер акта НО")
-                        @Html.EditorFor(model => model.ddo.Номер_акта_НО)
+                        @Html.LabelFor(model => model.ddo.Номер_акта_НО, "Номер акта НО", htmlAttributes: new { @class = "input-group-addon col-md-2", @style = "width:170px; line-height: inherit" })
+                        @Html.EditorFor(model => model.ddo.Номер_акта_НО, new { htmlAttributes = new { @class = "form-control", @style = "width:auto" } })
                     </p>
                     <p>
-                        @Html.LabelFor(model => model.ddo.Дата_начала_ДДО, "Дата начала ДДО")
-                        @Html.EditorFor(model => model.ddo.Дата_начала_ДДО)
+                        @Html.LabelFor(model => model.ddo.Дата_начала_ДДО, "Дата начала ДДО", htmlAttributes: new { @class = "input-group-addon col-md-2", @style = "width:170px; line-height: inherit" })
+                        @Html.EditorFor(model => model.ddo.Дата_начала_ДДО, new { htmlAttributes = new { @class = "form-control", @style = "width:auto" } })
                     </p>
                     <p>
-                        @Html.LabelFor(model => model.ddo.Дата_окончания_ДДО, "Дата окончания ДДО")
-                        @Html.EditorFor(model => model.ddo.Дата_окончания_ДДО)
+                        @Html.LabelFor(model => model.ddo.Дата_окончания_ДДО, "Дата окончания ДДО", htmlAttributes: new { @class = "input-group-addon col-md-2", @style = "width:170px; line-height: inherit" })
+                        @Html.EditorFor(model => model.ddo.Дата_окончания_ДДО, new { htmlAttributes = new { @class = "form-control", @style = "width:auto" } })
                     </p>
                     <p>
-                        @Html.LabelFor(model => model.ddo.Разр__давление, "Разр. давление")
-                        @Html.EditorFor(model => model.ddo.Разр__давление)
+                        @Html.LabelFor(model => model.ddo.Разр__давление, "Разр. давление", htmlAttributes: new { @class = "input-group-addon col-md-2", @style = "width:170px; line-height: inherit" })
+                        @Html.EditorFor(model => model.ddo.Разр__давление, new { htmlAttributes = new { @class = "form-control", @style = "width:auto" } })
                     </p>
                     <p>
-                        @Html.LabelFor(model => model.ddo.Срок_ремонта, "Срок ремонта")
-                        @Html.EditorFor(model => model.ddo.Срок_ремонта)
+                        @Html.LabelFor(model => model.ddo.Срок_ремонта, "Срок ремонта", htmlAttributes: new { @class = "input-group-addon col-md-2", @style = "width:170px; line-height: inherit" })
+                        @Html.EditorFor(model => model.ddo.Срок_ремонта, new { htmlAttributes = new { @class = "form-control", @style = "width:auto" } })
                     </p>
                     <p>
-                        @Html.LabelFor(model => model.ddo.id_результаты_ДДО, "Результаты ДДО")
-                        @Html.DropDownListFor(model => model.ddo.id_результаты_ДДО, Model.resultDDO)
+                        @Html.LabelFor(model => model.ddo.id_результаты_ДДО, "Результаты ДДО", htmlAttributes: new { @class = "input-group-addon col-md-2", @style = "width:170px; line-height: inherit" })
+                        @Html.DropDownListFor(model => model.ddo.id_результаты_ДДО, Model.resultDDO, htmlAttributes: new { @class = "form-control", @style = "width:195px" })
                     </p>
                 </div>
 
@@ -87,26 +93,26 @@
                     <span><strong>Ремонт</strong></span>
                     @Html.HiddenFor(model => model.repair.id)
                     <p>
-                        @Html.LabelFor(model => model.repair.Дата_начала, "Дата начала")
-                        @Html.EditorFor(model => model.repair.Дата_начала)
+                        @Html.LabelFor(model => model.repair.Дата_начала, "Дата начала", htmlAttributes: new { @class = "input-group-addon col-md-2", @style = "width:170px; line-height: inherit" })
+                        @Html.EditorFor(model => model.repair.Дата_начала, new { htmlAttributes = new { @class = "form-control", @style = "width:auto" } })
                     </p>
                     <p>
-                        @Html.LabelFor(model => model.repair.Дата_окончания, "Дата окончания")
-                        @Html.EditorFor(model => model.repair.Дата_окончания)
+                        @Html.LabelFor(model => model.repair.Дата_окончания, "Дата окончания", htmlAttributes: new { @class = "input-group-addon col-md-2", @style = "width:170px; line-height: inherit" })
+                        @Html.EditorFor(model => model.repair.Дата_окончания, new { htmlAttributes = new { @class = "form-control", @style = "width:auto" } })
                     </p>
                     <p>
-                        @Html.LabelFor(model => model.repair.id_виды_ремонта, "Вид ремонта")
-                        @Html.DropDownListFor(model => model.repair.id_виды_ремонта, Model.repairKind)
+                        @Html.LabelFor(model => model.repair.id_виды_ремонта, "Вид ремонта", htmlAttributes: new { @class = "input-group-addon col-md-2", @style = "width:170px; line-height: inherit" })
+                        @Html.DropDownListFor(model => model.repair.id_виды_ремонта, Model.repairKind, htmlAttributes: new { @class = "form-control", @style = "width:195px" })
                     </p>
                     <p>
-                        @Html.LabelFor(model => model.repair.Примечание, "Примечание")
-                        @Html.EditorFor(model => model.repair.Примечание)
+                        @Html.LabelFor(model => model.repair.Примечание, "Примечание", htmlAttributes: new { @class = "input-group-addon col-md-2", @style = "width:170px; line-height: inherit" })
+                        @Html.EditorFor(model => model.repair.Примечание, new { htmlAttributes = new { @class = "form-control", @style = "width:auto" } })
                     </p>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-offset-8 col-md-1">
-                    <button class="btn btn-default" type="submit">Войти</button>
+                    <button class="btn btn-default" type="submit">Ok</button>
                     @*<input type="submit" id="ok" value="Ok" class="btn btn-default" />*@  
                 </div>
                 <button id="cancel" class="btn btn-default col-md-1">Отмена</button>

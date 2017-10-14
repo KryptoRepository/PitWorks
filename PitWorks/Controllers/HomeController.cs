@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using PitWorks.Models;
 using Newtonsoft.Json;
+using System.Data.Entity;
 
 namespace PitWorks.Controllers
 {
@@ -307,6 +308,12 @@ namespace PitWorks.Controllers
         [HttpPost]
         public void EditDefectPartial(EditDefectModel editModel)
         {
+            Дефект def = new Дефект();
+            editModel.defect.id_признак_состояния = Convert.ToInt32(editModel.status);
+            //db.Entry(editModel.vtd).State = EntityState.Modified;
+            //db.Entry(editModel.ddo).State = EntityState.Modified;
+            //db.Entry(editModel.repair).State = EntityState.Modified;
+            //db.Entry(editModel.defect).State = EntityState.Modified;
 
             //db.Entry(book).State = EntityState.Modified;
         }
