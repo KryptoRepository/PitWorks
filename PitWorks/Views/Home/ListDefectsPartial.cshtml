@@ -1,0 +1,54 @@
+﻿<script>
+    $(document).ready(function (e) {
+        sessionStorage.setItem('objID', '@ViewBag.objectID');
+        var objID = '@ViewBag.objectID';
+        console.log(objID);
+    })
+</script>
+
+<div class="nav" style="height:300px; max-height:300px; overflow:scroll">
+    @foreach (var def in ViewBag.defects)
+    {
+        try
+        {
+            string linkText = "Вид:" + def.defKind.Наименование + " ; Ориент.: " + def.vtd.Ориент__дефекта + "; Длина: " + def.vtd.Длина_дефекта
+                             + " ; Ширина: " + def.vtd.Ширина_дефекта + "; Глубина: " + def.vtd.Глубина_дефекта + "; Срок: " + def.vtd.Срок_НО_по_ВТД + "; Дата ВТД: " + def.vtd.Дата_проведения_ВТД;
+            string defectID = def.id.ToString();
+            
+            @*@Html.ActionLink(linkText, "EditDefectPartial", "Home", new { id = defectID }, new { @class = "editDefectModal", @data_target = "editDefectModal" });*@
+            @Html.ActionLink(linkText, "EditDefectPartial", "Home", new { defecctID = defectID }, new { @data_toggle = "modal", @data_target = "#modDialogEditDefect" });
+
+          <p></p>
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+</div>
+
+@*<div class="row">
+     <button id="addDefect" class="btn btn-primary">Добавить дефект</button>
+</div>
+
+<div id="modDialogDefect" class="modal fade">
+    <div id="contentDefect" class="modal-dialog">
+
+    </div>
+</div>*@
+
+<script>
+    $('.editDefectModal').click(function (e) {
+
+    })
+
+    //$('#addDefect').click(function (e) {
+    //    e.preventDefault;
+    //    $.get("Home/AddDefectPartial", function (data) {
+    //        $('#contentDefect').html(data);
+    //        $('#modDialogDefect').modal('show');
+    //    });
+    //});
+</script>
+
+

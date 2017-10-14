@@ -1,0 +1,174 @@
+﻿@model string[]
+@{
+    ViewBag.Title = "CatalogDetailedDefects";
+}
+
+<br />
+<br />
+<div id="modDialog" class="modal fade">
+    <div id="dialogContent" class="modal-dialog" style="width:auto">
+    </div>
+</div>
+
+<h3>Подробная информация</h3>
+<p style="font-size:medium">@Model[0]; Газопровод: @Model[1]; Участок МГ: @Model[2]; Место: @Model[3]; № Трубы: @Model[4]</p>
+<div class="row">
+    <div class="col-md-8">
+        <span><strong>Дефекты</strong></span>
+        <div class="sidebar-offcanvas" role="navigation">
+            <div class="well sidebar-nav">
+
+                @*Подгружаем ДЕФЕКТЫ ля объекта при загрузке страницы*@
+                <br />
+
+                <div id="listDefects">
+                    @Html.Action("ListDefectsPartial", "Home")
+
+                </div>
+
+            </div><!--/.well -->
+        </div>
+    </div>
+    <br />
+    <div class="col-md-2">
+        <button class="btn btn-primary" onclick="AddDefect()">Добавить дефект</button>
+    </div>
+</div>
+
+@*сделать в две строки:
+        1я инфа о выделенном дефекте
+        2я добавление дефекта
+    Или добавление в модальное окно*@
+
+<div class="row">
+    <div class="col-md-4">
+        <span><strong>Внутритрубная диагностиа</strong></span>
+        <div class="input-group">
+            <label class="input-group-addon" style="width:170px" id="basic-addon1">Вид дефекта</label>
+            <select id="vtd1" class="form-control" style="width:170px">
+                <option>Коррозия</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label class="input-group-addon" style="width:170px" id="basic-addon1">Ориент. дефекта</label>
+            <input id="ddo1" type="text" style="width:170px" class="form-control" placeholder="">
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon" style="width:170px" id="basic-addon1">Длина дефекта</label>
+            <input id="ddo1" type="text" style="width:170px" class="form-control" placeholder="">
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon" style="width:170px" id="basic-addon1">Ширина дефекта</label>
+            <input id="ddo1" type="text" style="width:170px" class="form-control" placeholder="">
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon" style="width:170px" id="basic-addon1">Глубина дефекта</label>
+            <input id="ddo1" type="text" style="width:170px" class="form-control" placeholder="">
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon" style="width:170px" id="basic-addon1">Срок НО по ВТД</label>
+            <input id="ddo1" type="text" style="width:170px" class="form-control" placeholder="">
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon" style="width:170px" id="basic-addon1">Дата проведения ВТД</label>
+            <input id="vtd7" type="date" style="width:170px" class="form-control" placeholder="">
+        </div>
+    </div>
+
+    <div class=" col-md-4">
+        <span><strong>Дополнительное диагностическое обследование</strong></span>
+        <div class="input-group">
+            <label class="input-group-addon" style="width:170px" id="basic-addon1">Номер МПР</label>
+            <input id="ddo1" type="text" style="width:170px" class="form-control" placeholder="">
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon" style="width:170px" id="basic-addon1">Номер акта НО</label>
+            <input id="ddo2" type="text" style="width:170px" class="form-control" placeholder="">
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon" style="width:170px" id="basic-addon1">Дата начала ДДО</label>
+            <input id="ddo3" type="text" style="width:170px" class="form-control" placeholder="">
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon" style="width:170px" id="basic-addon1">Дата окончания ДДО</label>
+            <input id="ddo4" type="text" style="width:170px" class="form-control" placeholder="">
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon" style="width:170px" id="basic-addon1">Разр. давление</label>
+            <input id="ddo5" type="text" style="width:170px" class="form-control" placeholder="">
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon" style="width:170px" id="basic-addon1">Срок ремонта</label>
+            <input id="ddo6" type="text" style="width:170px" class="form-control" placeholder="">
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon" style="width:170px" id="basic-addon1">Результаты ДДО</label>
+            <select id="ddo7" style="width:170px" class="form-control">
+                <option value="1">Земляные работы выполнены</option>
+                <option value="2">Дефект отшурфован</option>
+                <option value="3">Ожидается результат обследования</option>
+                <option value="4">Обследовано, подлежит ремонту</option>
+                <option value="5">Обследовано, ремонт не требуется</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <span><strong>Ремонт</strong></span>
+        <div class="input-group">
+            <label class="input-group-addon" style="width:130px" id="basic-addon1">Дата начала</label>
+            <input id="repair1" type="date" style="width:170px" class="form-control" placeholder="">
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon" style="width:130px" id="basic-addon1">Дата окончания</label>
+            <input id="repair2" type="date" style="width:170px" class="form-control" placeholder="">
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon" style="width:130px" id="basic-addon1">Вид ремонта</label>
+            <select id="repair3" style="width:170px" class="form-control">
+                <option value="">Дефет изоляции устранен</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon" style="width:130px" id="basic-addon1">Примечание</label>
+            <input id="repair4" type="text" style="width:170px" class="form-control" placeholder="">
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-md-offset-2 col-md-6">
+                <button class="btn btn-primary nav-justified">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<br />
+<div class="row">
+
+</div>
+
+<script type="text/jscript">
+    function AddDefect() {
+        //при запросе на один из адресов может быть ошибка.
+        //Работает:
+        // "Home/AddDefectPartial"    Если запрос от http://localhost:8513/
+        //  "AddDefectPartial"        Если запрос от http://localhost:8513/Home/Index
+
+        $.get("Home/AddDefectPartial", function (data) {
+            $('#dialogContent').html(data);
+            $('#modDialog').modal('show');
+            console.log("HOME get");
+        })
+
+        $.get("AddDefectPartial", function (data) {
+            $('#dialogContent').html(data);
+            $('#modDialog').modal('show');
+            console.log("without HOME get");
+        })
+
+
+    };
+</script>

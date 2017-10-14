@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="df8703ca8cca446b95ad540affba7d5b" Name="Diagram1">
+        <EntityTypeShape EntityType="PitDBModel.Виды_дефектов" Width="1.5" PointX="3.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PitDBModel.Виды_ремонта" Width="1.5" PointX="3.75" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PitDBModel.Внутритрубная_диагностика" Width="1.5" PointX="6" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PitDBModel.ДДО" Width="1.5" PointX="6" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PitDBModel.Дефект" Width="1.5" PointX="8.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="PitDBModel.ЛПУ" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PitDBModel.Объект" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PitDBModel.Пользователь" Width="1.5" PointX="6" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PitDBModel.Признак_состояния_работы" Width="1.5" PointX="6" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PitDBModel.Результаты_ДДО" Width="1.5" PointX="3.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PitDBModel.Ремонт" Width="1.5" PointX="6" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="PitDBModel.Уровни_доступа" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PitDBModel.Участок_газопровода" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="PitDBModel.FK_Внутритрубная_диагностика_Виды_дефектов" ManuallyRouted="false" />
+        <AssociationConnector Association="PitDBModel.FK_Ремонт_Виды_ремонта" ManuallyRouted="false" />
+        <AssociationConnector Association="PitDBModel.FK_Дефект_Внутритрубная_диагностика" ManuallyRouted="false" />
+        <AssociationConnector Association="PitDBModel.FK_ДДО_Результаты_ДДО" ManuallyRouted="false" />
+        <AssociationConnector Association="PitDBModel.FK_Дефект_ДДО" ManuallyRouted="false" />
+        <AssociationConnector Association="PitDBModel.FK_Дефект_Объект" ManuallyRouted="false" />
+        <AssociationConnector Association="PitDBModel.FK_Дефект_Признак_состояния_работы" ManuallyRouted="false" />
+        <AssociationConnector Association="PitDBModel.FK_Дефект_Ремонт" ManuallyRouted="false" />
+        <AssociationConnector Association="PitDBModel.FK_Объект_ЛПУ" ManuallyRouted="false" />
+        <AssociationConnector Association="PitDBModel.FK_Пользователь_ЛПУ" ManuallyRouted="false" />
+        <AssociationConnector Association="PitDBModel.FK_Объект_Участок_газопровода" ManuallyRouted="false" />
+        <AssociationConnector Association="PitDBModel.FK_Пользователь_Уровни_доступа" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

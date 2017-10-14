@@ -1,0 +1,206 @@
+﻿<div class="modal-content" style="height:500px; width:1000px">
+    <div class="modal-header">
+        <button id="closeModal" class="close" data-dismiss="modal" area-hidden="true">X</button>
+        <h4>Добавить дефект</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-4">
+                <span><strong>Внутритрубная диагностиа</strong></span>
+                <div class="input-group">
+                    <label class="input-group-addon" style="width:170px" id="basic-addon1">Вид дефекта</label>
+                    <select id="vtd01" class="form-control" style="width:170px">
+                        <option value="0">Коррозия</option>
+                        <option value="1">Аномалия кольцевого шва</option>
+                        <option value="2">Аномалия продольного шва</option>
+                        <option value="3">Механическое повреждение</option>
+                        <option value="4">Гофра</option>
+                        <option value="5">Трещиноподобный дефект</option>
+                        <option value="6">Технологический дефект</option>
+                        <option value="7">Потеря металла</option>
+                        <option value="8">Потеря металла примыкающая к продольному сварному шву</option>
+                        <option value="9">Вмятина с дополнительной особенностью</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-group-addon" style="width:170px" id="basic-addon1">Ориент. дефекта</label>
+                    <input id="vtd02" type="text" style="width:170px" class="form-control" placeholder="">
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon" style="width:170px" id="basic-addon1">Длина дефекта</label>
+                    <input id="vtd03" type="text" style="width:170px" class="form-control" placeholder="">
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon" style="width:170px" id="basic-addon1">Ширина дефекта</label>
+                    <input id="vtd04" type="text" style="width:170px" class="form-control" placeholder="">
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon" style="width:170px" id="basic-addon1">Глубина дефекта</label>
+                    <input id="vtd05" type="text" style="width:170px" class="form-control" placeholder="">
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon" style="width:170px" id="basic-addon1">Срок НО по ВТД</label>
+                    <input id="vtd06" type="text" style="width:170px" class="form-control" placeholder="">
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon" style="width:170px" id="basic-addon1">Дата проведения ВТД</label>
+                    <input id="vtd07" type="date" style="width:170px" class="form-control" placeholder="">
+                </div>
+            </div>
+
+            <div class=" col-md-4">
+                <span><strong>Дополнительное диагностическое обследование</strong></span>
+                <div class="input-group">
+                    <label class="input-group-addon" style="width:170px" id="basic-addon1">Номер МПР</label>
+                    <input id="ddo01" type="text" style="width:170px" class="form-control" placeholder="">
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon" style="width:170px" id="basic-addon1">Номер акта НО</label>
+                    <input id="ddo02" type="text" style="width:170px" class="form-control" placeholder="">
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon" style="width:170px" id="basic-addon1">Дата начала ДДО</label>
+                    <input id="ddo03" type="date" style="width:170px" class="form-control" placeholder="">
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon" style="width:170px" id="basic-addon1">Дата окончания ДДО</label>
+                    <input id="ddo04" type="date" style="width:170px" class="form-control" placeholder="">
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon" style="width:170px" id="basic-addon1">Разр. давление</label>
+                    <input id="ddo05" type="text" style="width:170px" class="form-control" placeholder="">
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon" style="width:170px" id="basic-addon1">Срок ремонта</label>
+                    <input id="ddo06" type="text" style="width:170px" class="form-control" placeholder="">
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon" style="width:170px" id="basic-addon1">Результаты ДДО</label>
+                    <select id="ddo07" style="width:170px" class="form-control">
+                        <option value="0">Земляные работы выполнены</option>
+                        <option value="1">Дефект отшурфован</option>
+                        <option value="2">Ожидается результат обследования</option>
+                        <option value="3">Обследовано, подлежит ремонту</option>
+                        <option value="4">Обследовано, ремонт не требуется</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <span><strong>Ремонт</strong></span>
+                <div class="input-group">
+                    <label class="input-group-addon" style="width:130px" id="basic-addon1">Дата начала</label>
+                    <input id="repair01" type="date" style="width:170px" class="form-control" placeholder="">
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon" style="width:130px" id="basic-addon1">Дата окончания</label>
+                    <input id="repair02" type="date" style="width:170px" class="form-control" placeholder="">
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon" style="width:130px" id="basic-addon1">Вид ремонта</label>
+                    <select id="repair03" style="width:170px" class="form-control">
+                        <option value="0">Дефект изоляции устранен</option>
+                        <option value="1">Устранено наплавкой</option>
+                        <option value="2">Устранено шлифовкой</option>
+                        <option value="3">Устранено заменой катушки</option>
+                        <option value="4">Устранено заменой участка</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon" style="width:130px" id="basic-addon1">Примечание</label>
+                    <input id="repair04" type="text" style="width:170px" class="form-control" placeholder="">
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <button id="ok" class="btn btn-primary col-md-offset-8 col-md-1">Ок</button>
+            <button id="cancel" class="btn btn-default col-md-1">Отмена</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $('#ok').click(function (e) {
+        e.preventDefault();
+
+        var defectInfo = [];
+
+        defectInfo[0] = vtd01.value;
+        defectInfo[1] = vtd02.value;
+        defectInfo[2] = vtd03.value;
+        defectInfo[3] = vtd04.value;
+        defectInfo[4] = vtd05.value;
+        defectInfo[5] = vtd06.value;
+        defectInfo[6] = vtd07.value;
+
+        defectInfo[7] = ddo01.value;
+        defectInfo[8] = ddo02.value;
+        defectInfo[9] = ddo03.value;
+        defectInfo[10] = ddo04.value;
+        defectInfo[11] = ddo05.value;
+        defectInfo[12] = ddo06.value;
+        defectInfo[13] = ddo07.value;
+
+        defectInfo[14] = repair01.value;
+        defectInfo[15] = repair02.value;
+        defectInfo[16] = repair03.value;
+        defectInfo[17] = repair04.value;
+
+
+        $.ajax({
+            url: 'AddDefect',
+            type: 'POST',
+            async: false,
+            data: {
+                objectID: sessionStorage.getItem('objID'),
+                defectInfo: defectInfo
+            },
+            success: function (data) {
+                refreshObjectsList();
+                refreshDefectsList(data);
+             
+                $('#closeModal').click();
+            }
+        });
+
+        function refreshObjectsList() {
+            $.ajax({
+                url: 'ListObjectsPartial',
+                type: 'get',
+                async: false,
+                data: {
+                    lpuIDListJSON: "",
+                },
+                success: function (data) {
+                    console.log("after add:")
+                    console.log(data);
+                    $('#listObjects').html(data);
+                }
+            });
+        }
+
+        function refreshDefectsList(objID) {
+            $.ajax({
+                url: 'ListDefectsPartial',
+                type: 'get',
+                async: false,
+                data: {
+                    id: sessionStorage.getItem('objID'),
+                },
+                success: function (data) {
+                    $('#listDefects').html(data);
+                }
+            });
+        };
+    })
+
+    $('#cancel').click(function (e) {
+        e.preventDefault();
+
+        $('#closeModal').click();
+    })
+</script>
+

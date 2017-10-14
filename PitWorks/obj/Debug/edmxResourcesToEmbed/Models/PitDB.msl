@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище PitDBModelContainer" CdmEntityContainer="PitDBEntities">
+    <EntitySetMapping Name="Виды_дефектов">
+      <EntityTypeMapping TypeName="PitDBModel.Виды_дефектов">
+        <MappingFragment StoreEntitySet="Виды дефектов">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Виды_ремонта">
+      <EntityTypeMapping TypeName="PitDBModel.Виды_ремонта">
+        <MappingFragment StoreEntitySet="Виды ремонта">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Внутритрубная_диагностика">
+      <EntityTypeMapping TypeName="PitDBModel.Внутритрубная_диагностика">
+        <MappingFragment StoreEntitySet="Внутритрубная диагностика">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_виды_дефектов" ColumnName="id виды дефектов" />
+          <ScalarProperty Name="Ориент__дефекта" ColumnName="Ориент. дефекта" />
+          <ScalarProperty Name="Длина_дефекта" ColumnName="Длина дефекта" />
+          <ScalarProperty Name="Ширина_дефекта" ColumnName="Ширина дефекта" />
+          <ScalarProperty Name="Глубина_дефекта" ColumnName="Глубина дефекта" />
+          <ScalarProperty Name="Срок_НО_по_ВТД" ColumnName="Срок НО по ВТД" />
+          <ScalarProperty Name="Дата_проведения_ВТД" ColumnName="Дата проведения ВТД" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ДДО">
+      <EntityTypeMapping TypeName="PitDBModel.ДДО">
+        <MappingFragment StoreEntitySet="ДДО">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Номер_МПР" ColumnName="Номер МПР" />
+          <ScalarProperty Name="Номер_акта_НО" ColumnName="Номер акта НО" />
+          <ScalarProperty Name="Дата_начала_ДДО" ColumnName="Дата начала ДДО" />
+          <ScalarProperty Name="Дата_окончания_ДДО" ColumnName="Дата окончания ДДО" />
+          <ScalarProperty Name="Разр__давление" ColumnName="Разр. давление" />
+          <ScalarProperty Name="Срок_ремонта" ColumnName="Срок ремонта" />
+          <ScalarProperty Name="id_результаты_ДДО" ColumnName="id результаты ДДО" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Дефект">
+      <EntityTypeMapping TypeName="PitDBModel.Дефект">
+        <MappingFragment StoreEntitySet="Дефект">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_ВТД" ColumnName="id ВТД" />
+          <ScalarProperty Name="id_ДДО" ColumnName="id ДДО" />
+          <ScalarProperty Name="id_Ремонта" ColumnName="id Ремонта" />
+          <ScalarProperty Name="id_признак_состояния" ColumnName="id признак состояния" />
+          <ScalarProperty Name="id_объекта" ColumnName="id объекта" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ЛПУ">
+      <EntityTypeMapping TypeName="PitDBModel.ЛПУ">
+        <MappingFragment StoreEntitySet="ЛПУ">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Объект">
+      <EntityTypeMapping TypeName="PitDBModel.Объект">
+        <MappingFragment StoreEntitySet="Объект">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_участка_газопровода" ColumnName="id участка газопровода" />
+          <ScalarProperty Name="Участок_МГ" ColumnName="Участок МГ" />
+          <ScalarProperty Name="Место" ColumnName="Место" />
+          <ScalarProperty Name="Номер_трубы" ColumnName="Номер трубы" />
+          <ScalarProperty Name="id_ЛПУ" ColumnName="id ЛПУ" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Пользователь">
+      <EntityTypeMapping TypeName="PitDBModel.Пользователь">
+        <MappingFragment StoreEntitySet="Пользователь">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Логин" ColumnName="Логин" />
+          <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+          <ScalarProperty Name="id_уровня_доступа" ColumnName="id уровня доступа" />
+          <ScalarProperty Name="id_ЛПУ" ColumnName="id ЛПУ" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Признак_состояния_работы">
+      <EntityTypeMapping TypeName="PitDBModel.Признак_состояния_работы">
+        <MappingFragment StoreEntitySet="Признак состояния работы">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Результаты_ДДО">
+      <EntityTypeMapping TypeName="PitDBModel.Результаты_ДДО">
+        <MappingFragment StoreEntitySet="Результаты ДДО">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ремонт">
+      <EntityTypeMapping TypeName="PitDBModel.Ремонт">
+        <MappingFragment StoreEntitySet="Ремонт">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Дата_начала" ColumnName="Дата начала" />
+          <ScalarProperty Name="Дата_окончания" ColumnName="Дата окончания" />
+          <ScalarProperty Name="id_виды_ремонта" ColumnName="id виды ремонта" />
+          <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Уровни_доступа">
+      <EntityTypeMapping TypeName="PitDBModel.Уровни_доступа">
+        <MappingFragment StoreEntitySet="Уровни доступа">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Участок_газопровода">
+      <EntityTypeMapping TypeName="PitDBModel.Участок_газопровода">
+        <MappingFragment StoreEntitySet="Участок газопровода">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

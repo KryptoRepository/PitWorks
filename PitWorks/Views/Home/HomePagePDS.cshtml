@@ -1,0 +1,156 @@
+﻿@model List<PitWorks.Models.LPUModel> 
+@{
+    ViewBag.Title = "HomePagePDS";
+}
+<label style="font-size:x-large; padding-top:5px">Страница ПДС</label>
+
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+        Выбрать ЛПУ
+        <span class="caret"></span>
+    </button>
+
+    <ul class="dropdown-menu" id="dropdownLPU" data-toggle="collapse">
+        @foreach (var lpu in Model)
+        {
+            <li><input id=@("chLPU" + lpu.id)   type="checkbox" name="lpuIDList" value=@lpu.id />@lpu.Name</li>
+        }
+    </ul>
+</div>
+<button class="btn-primary" id="filterLPU">Ok</button>
+
+<div class="row">
+    <div class="col-md-6">
+        <label style="font-size:large">Объекты</label>
+        <div class="sidebar-offcanvas" role="navigation">
+            <div class="well sidebar-nav nav-justified">
+                @*Подгружаем объекты при загрузке страницы*@
+                <div id="listObjects">
+                    @Html.Action("ListObjectsPartial", "Home", new { lpuIDListJSON = "" })@*new List<int>{}*@
+                </div>
+                <button id="addObjectButton" class="btn btn-primary">Добавить объект</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label style="font-size:large">Дефекты</label>
+
+        <div class="sidebar-offcanvas" role="navigation">
+            <div class="well sidebar-nav nav-justified">
+                <div id="listDefects">
+                    <!--частичное представление-->
+                </div>
+
+                <div class="row">
+                     <button id="addDefect" class="btn btn-primary">Добавить дефект</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--row-->
+
+
+@*<div class="row">
+    <div class="col-md-offset-3 col-md-2">
+    </div>
+</div>*@
+<br />
+
+@*<div class="row">
+    <textarea class="col-md-5"></textarea>
+
+    <button id="inputText" class="btn btn-primary" style="margin-left:20px">Ок</button>
+</div>*@
+
+<div class="row">
+    <div id="tableDefects">
+        
+    </div>
+</div>
+
+
+<div id="modDialogObject" class="modal fade">
+    <div id="dialogAddObject" class="modal-dialog">
+    </div>
+</div>
+
+<div id="modDialogDefect" class="modal fade">
+    <div id="dialogAddDefect" class="modal-dialog" style="transform: translate(-35%)">
+    </div>
+</div>
+
+<div id="modDialogEditDefect" class="modal fade">
+    <div id="dialogEditDefect" class="modal-dialog" style="transform: translate(-35%)">
+    </div>
+</div>
+
+<script>
+    $('#dropdownLPU').click(function (e) {
+        e.stopPropagation();
+    });
+
+    $('#filterLPU').click(function (e) {
+        e.preventDefault();
+        var arrayID= [];
+        //находим циклом каждый отмеченный чекбокс
+
+        var cb = document.getElementById('dropdownLPU').getElementsByTagName('input');
+        for (var i = 0; i < cb.length; i++)
+        {
+            if (cb[i].type == 'checkbox')
+            {
+                if (cb[i].checked)
+                {
+                    arrayID.push(Number(i))
+                }
+            }
+        }
+      
+        $.ajax({
+            url: "ListObjectsPartial",
+            data: { lpuIDListJSON: JSON.stringify(arrayID) },
+            async: false,
+            success: (function (data) {
+                $("#listObjects").html(data);
+         
+            })
+        });
+    });
+
+    $('#addObjectButton').click(function (e) {
+        e.preventDefault();
+        
+        //при запросе на один из адресов может быть ошибка.
+        //Работает:
+        // "Home/PartialAddObject"    Если запрос от http://localhost:8513/
+        //  "PartialAddObject"        Если запрос от http://localhost:8513/Home/
+
+        //попробовать вместо этого Ajax.ActionLink
+        $.get("Home/AddObjectPartial", function (data) {
+            $('#dialogAddObject').html(data);
+            $('#modDialogObject').modal('show');
+            console.log("HOME get");
+        });
+
+        $.get("AddObjectPartial", function (data) {
+            $('#dialogAddObject').html(data);
+            $('#modDialogObject').modal('show');
+            console.log("without HOME get");
+        });
+    });
+
+    $('#addDefect').click(function (e) {
+        e.preventDefault;
+        console.log('homePDS');
+        console.log(sessionStorage.getItem('objID'));
+        if ((sessionStorage.getItem('objID') != undefined) && (sessionStorage.getItem('objID') != null)) {
+            $.get("AddDefectPartial", function (data) {
+                $('#dialogAddDefect').html(data);
+                $('#modDialogDefect').modal('show');
+            });
+        }
+    });
+
+</script>
+
+

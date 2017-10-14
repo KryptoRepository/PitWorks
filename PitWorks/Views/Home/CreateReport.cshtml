@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "CreateReport";
+}
+
+<h2>CreateReport</h2>
+
+<!-- Include Fancy
+    
+    tree skin and library -->
+
+<link href="~/Content/jquery.fancytree-css/skin-win8/ui.fancytree.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.fancytree-all.min.js"></script>
+
+<div id="tree">
+
+</div>
+
+<button class="btn btn-default" id="report">Показать</button>
+<a href="#" class="btn btn-default" id="save" onclick="fnExcelReport()">Сохранить</a>
+<table class="table-bordered" id="reportTable" border="1" style="text-align:center">
+    <thead>
+        <tr style="color:White;background-color:#507CD1;font-weight:bold">
+            <th colspan="6" style="background-color:white; border-width: 0px"></th>
+            <th colspan="7" style="text-align:center; border-width: 2px ">Внутритрубная диагностика</th>
+            <th colspan="7" style="text-align:center; border-width: 2px">Дополнительное диагностическое обследование</th>
+            <th colspan="4" style="text-align:center; border-width: 2px">Ремонт</th>
+        </tr>
+
+        <tr style="color:White;background-color:#507CD1;font-weight:bold;">
+            <th style="text-align:center; border-width: 2px; min-width:50px">В работе</th>
+            <th style="text-align:center; border-width: 2px; min-width:150px">ЛПУ</th>
+            <th style="text-align:center; border-width: 2px; min-width:150px">Наименование газопровода</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Участок МГ, км-км</th>
+            <th style="text-align:center; border-width: 2px; min-width:80px">Место, км.м</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">№ трубы</th>
+
+            <th style="text-align:center; border-width: 2px; min-width:150px">Вид дефекта</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Ориент. дефекта</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Длина дефекта</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Ширина дефекта</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Глубина дефекта</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Срок НО по ВТД</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Дата проведения ВТД</th>
+
+            <th style="text-align:center; border-width: 2px; min-width:70px">Номер МПР</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Номер акта НО</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Дата начала ДДО</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Дата окончания ДДО</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Результаты ДДО</th>
+            <th style="text-align:center; border-width: 2px; min-width:70px">Разр. давление</th>
+            <th style="text-align:center; border-width: 2px; min-width:70px">Срок ремонта</th>
+
+            <th style="text-align:center; border-width: 2px; min-width:100px">Дата начала</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Дата окончания</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Вид ремонта</th>
+            <th style="text-align:center; border-width: 2px; min-width:200px">Примечание</th>
+        </tr>
+    </thead>
+</table>
+
+<script type="text/javascript">
+    var selectedNodes;
+    var keys;
+
+    (function ($) {
+        $(function () {
+
+            var str;
+
+            $.ajax({
+                url: 'GetObjectsToReportJSON',
+                type: 'get',
+                async: false,
+                success: function (data) {
+                    str = data;
+                }
+            });
+
+            $("#tree").fancytree({
+                checkbox: true,
+                selectMode: 3,
+                source:
+                        function () {
+                            return JSON.parse(str);
+                        }
+                    ,
+                select: function (event, data) {
+                    selectedNodes = data.tree.getSelectedNodes();
+                    var selKeys = $.map(data.tree.getSelectedNodes(), function (node) {
+                        return node.key;
+                    });
+                    keys = selKeys;
+                }
+            });
+        });
+    })(jQuery);
+
+
+    $("#report").click(function (e) {
+        $.ajax({
+            url: 'ReportTablePartial',
+            async: false,
+            data: { keysJSON: JSON.stringify(keys) },
+            context: ('#reportTable'),
+            success: function (data) {
+                $('#reportTable').html(data);
+            }
+        });
+    });
+
+    function fnExcelReport() {
+        var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
+        tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+
+        tab_text = tab_text + '<x:Name>Test Sheet</x:Name>';
+
+        tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+        tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+
+        tab_text = tab_text + "<table border='1px'>";
+        tab_text = tab_text + $('#reportTable').html();
+        tab_text = tab_text + '</table></body></html>';
+
+        var data_type = 'data:application/vnd.ms-excel';
+
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf("MSIE ");
+
+        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+            if (window.navigator.msSaveBlob) {
+                var blob = new Blob([tab_text], {
+                    type: "application/csv;charset=utf-8;"
+                });
+                navigator.msSaveBlob(blob, 'Test file.xls');
+            }
+        } else {
+            $('#save').attr('href', data_type + ', ' + encodeURIComponent(tab_text));
+            $('#save').attr('download', 'Test file.xls');
+        }
+
+    }
+</script>

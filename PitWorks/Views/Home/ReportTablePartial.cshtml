@@ -1,0 +1,99 @@
+﻿@model List<PitWorks.Models.ReportObjectModel> 
+
+<table class="table-bordered" id="reportTable" border="1" style="text-align:center">
+    <thead>
+        <tr style="color:White;background-color:#507CD1;font-weight:bold;">
+            <th colspan="6" style="background-color:white; border-width: 2px"></th>
+            <th colspan="7" style="text-align:center; border-width: 2px">Внутритрубная диагностика</th>
+            <th colspan="7" style="text-align:center; border-width: 2px">Дополнительное диагностическое обследование</th>
+            <th colspan="4" style="text-align:center; border-width: 2px">Ремонт</th>
+        </tr>
+
+        <tr style="color:White;background-color:#507CD1;font-weight:bold;">
+            <th style="text-align:center; border-width: 2px; min-width:50px">В работе</th>
+            <th style="text-align:center; border-width: 2px; min-width:150px">ЛПУ</th>
+            <th style="text-align:center; border-width: 2px; min-width:150px">Наименование газопровода</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Участок МГ, км-км</th>
+            <th style="text-align:center; border-width: 2px; min-width:80px">Место, км.м</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">№ трубы</th>
+
+            <th style="text-align:center; border-width: 2px; min-width:150px">Вид дефекта</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Ориент. дефекта</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Длина дефекта</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Ширина дефекта</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Глубина дефекта</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Срок НО по ВТД</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Дата проведения ВТД</th>
+
+            <th style="text-align:center; border-width: 2px; min-width:70px">Номер МПР</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Номер акта НО</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Дата начала ДДО</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Дата окончания ДДО</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Результаты ДДО</th>
+            <th style="text-align:center; border-width: 2px; min-width:70px">Разр. давление</th>
+            <th style="text-align:center; border-width: 2px; min-width:70px">Срок ремонта</th>
+
+            <th style="text-align:center; border-width: 2px; min-width:100px">Дата начала</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Дата окончания</th>
+            <th style="text-align:center; border-width: 2px; min-width:100px">Вид ремонта</th>
+            <th style="text-align:center; border-width: 2px; min-width:200px">Примечание</th>
+        </tr>
+    </thead>
+
+    @* Формируем таблицу дефектов объекта*@
+    <tbody id="tableBody">
+        @try{
+        foreach (var obj in Model.ToList())
+        {
+            foreach (var defect in obj.defects)
+            {
+                <tr>
+                    <td>
+                        @if (defect.id_признак_состояния == 1)
+                        {
+                            <label><input type="checkbox" checked="checked"></label>
+                        }
+                        else
+                        {
+                            <label><input type="checkbox"></label>
+                        }
+                    </td>
+                    <td>@obj.lpuName</td>
+                    <td>@obj.sectionTube</td>
+                    <td>@obj.pitObject.Участок_МГ</td>
+                    <td>@obj.pitObject.Место</td>
+                    <td>@obj.pitObject.Номер_трубы</td>
+
+                    @*<td>@defect.defectItems</td>*@
+
+                    <td>@defect.defKind.Наименование</td>
+                    <td>@defect.vtd.Ориент__дефекта</td>
+                    <td>@defect.vtd.Длина_дефекта</td>
+                    <td>@defect.vtd.Ширина_дефекта</td>
+                    <td>@defect.vtd.Глубина_дефекта</td>
+                    <td>@defect.vtd.Срок_НО_по_ВТД</td>
+                    <td>@defect.vtd.Дата_проведения_ВТД</td>
+
+                    <td>@defect.ddo.Номер_МПР</td>
+                    <td>@defect.ddo.Номер_акта_НО</td>
+                    <td>@defect.ddo.Дата_начала_ДДО</td>
+                    <td>@defect.ddo.Дата_окончания_ДДО</td>
+                    <td>@defect.ddoResult.Наименование</td>
+                    <td>@defect.ddo.Разр__давление</td>
+                    <td>@defect.ddo.Срок_ремонта</td>
+
+                    <td>@defect.repair.Дата_начала</td>
+                    <td>@defect.repair.Дата_окончания</td>
+                    <td>@defect.repKind.Наименование</td>
+                    <td>@defect.repair.Примечание</td>
+                    <td></td>
+                </tr>
+            }
+        }
+        }
+        catch (Exception e)
+        {
+            
+        }      
+    </tbody>
+</table>

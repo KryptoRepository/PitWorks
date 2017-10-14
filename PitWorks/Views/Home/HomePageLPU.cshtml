@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "HomePageLPU";
+}
+
+<label style="font-size:x-large; padding-top:5px">Страница ЛПУ: @ViewBag.lpuName</label>
+
+<div class="row">
+    <div class="col-md-6">
+        <label style="font-size:large">Объекты</label>
+        <div class="sidebar-offcanvas" role="navigation">
+            <div class="well sidebar-nav nav-justified">
+                @*Подгружаем объекты при загрузке страницы*@
+                <div id="listObjects">
+
+                </div>
+                <button id="addObjectButton" class="btn btn-primary">Добавить объект</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label style="font-size:large">Дефекты</label>
+
+        <div class="sidebar-offcanvas" role="navigation">
+            <div class="well sidebar-nav nav-justified">
+                <div id="listDefects">
+                    <!--частичное представление-->
+                </div>
+
+                <div class="row">
+                    <button id="addDefect" class="btn btn-primary">Добавить дефект</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--row-->
+
+<div id="modDialogObject" class="modal fade">
+    <div id="dialogAddObject" class="modal-dialog">
+    </div>
+</div>
+
+<div id="modDialogDefect" class="modal fade">
+    <div id="dialogAddDefect" class="modal-dialog" style="transform: translate(-35%)">
+    </div>
+</div>
+
+<div id="modDialogEditDefect" class="modal fade">
+    <div id="dialogEditDefect" class="modal-dialog" style="transform: translate(-35%)">
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var arrayID = [];
+        arrayID.push(Number('@ViewBag.lpuID'))
+
+        $.ajax({
+            url: "ListObjectsPartial",
+            data: { lpuIDListJSON: JSON.stringify(arrayID) },
+            async: false,
+            success: (function (data) {
+                $("#listObjects").html(data);
+
+            })
+        });
+    })
+
+    $('#addObjectButton').click(function (e) {
+        e.preventDefault();
+
+        //при запросе на один из адресов может быть ошибка.
+        //Работает:
+        // "Home/PartialAddObject"    Если запрос от http://localhost:8513/
+        //  "PartialAddObject"        Если запрос от http://localhost:8513/Home/
+
+        //попробовать вместо этого Ajax.ActionLink
+        $.get("Home/AddObjectPartial", function (data) {
+            $('#dialogAddObject').html(data);
+            $('#modDialogObject').modal('show');
+            console.log("HOME get");
+        });
+
+        $.get("AddObjectPartial", function (data) {
+            $('#dialogAddObject').html(data);
+            $('#modDialogObject').modal('show');
+            console.log("without HOME get");
+        });
+    });
+
+    $('#addDefect').click(function (e) {
+        e.preventDefault;
+        console.log('homePDS');
+        console.log(sessionStorage.getItem('objID'));
+        if ((sessionStorage.getItem('objID') != undefined) && (sessionStorage.getItem('objID') != null)) {
+            $.get("AddDefectPartial", function (data) {
+                $('#dialogAddDefect').html(data);
+                $('#modDialogDefect').modal('show');
+            });
+        }
+    });
+
+</script>
+
+

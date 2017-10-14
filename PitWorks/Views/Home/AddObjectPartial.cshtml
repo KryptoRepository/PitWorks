@@ -1,0 +1,115 @@
+﻿@model PitWorks.Models.AddObjectModel
+
+<div class="modal-content">
+    <div class="modal-header">
+        <button id="closeModal" class="close" data-dismiss="modal" area-hidden="true">X</button>
+        <h4>Добавить объект</h4>
+    </div>
+    <div class="modal-body">
+        <div class="input-group">
+            <label class="input-group-addon" style="width:210px" id="basic-addon1">Название ЛПУ</label>
+            <select id="inputLPU" class="form-control" style="width:196px" name="size">
+                @try
+                {
+                    foreach (var item in Model.lpuList)
+                    {
+                        <option>@item.Наименование</option>
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            </select>
+
+            @*<input id="inputLPU" type="text" class="form-control" placeholder="" required>*@
+        </div>
+        <br />
+        <div class="input-group">
+            <label class="input-group-addon" style="width:210px" id="basic-addon1">Наименование газопровода</label>
+            <select id="inputTube" class="form-control" style="width:196px" name="size">
+                @try
+                {
+                    foreach (var item in Model.tubeList)
+                    {
+                        <option>@item.Наименование</option>
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            </select>
+            @* <input id="inputTube" type="text" class="form-control" placeholder="" required>*@
+        </div>
+        <br />
+        <div class="input-group">
+            <label class="input-group-addon" style="width:210px" id="basic-addon1">Участок МГ (км-км)</label>
+            <input id="inputTubePart" type="text" class="form-control" placeholder="" required>
+        </div>
+        <br />
+        <div class="input-group">
+            <label class="input-group-addon" style="width:210px" id="basic-addon1">Место (км,м)</label>
+            <input id="inputTubePlace" type="number" class="form-control" placeholder="" required>
+        </div>
+        <br />
+        <div class="input-group">
+            <label class="input-group-addon" style="width:210px" id="basic-addon1">№ трубы</label>
+            <input id="inputTubeNumber" type="number" class="form-control" placeholder="" required>
+        </div>
+        <br />
+        <button id="ok" class="btn btn-primary col-md-2">Ок</button>
+        <button id="cancel" class="btn btn-default col-sm-offset-1 col-md-2">Отмена</button>
+        <br />
+    </div>
+</div>
+
+<script>
+    $('#ok').click(function (e) {
+        e.preventDefault();
+
+        console.log(inputLPU.value);
+        console.log(inputTube.value);
+        console.log(inputTubePart.value);
+        console.log(inputTubePlace.value);
+        console.log(inputTubeNumber.value);
+
+        $.ajax({
+            url: 'AddObject',
+            type: 'POST',
+            async: false,
+            data: {
+                lpuName: inputLPU.value,
+                tubeName: inputTube.value,
+                tubePart: inputTubePart.value,
+                tubePlace: inputTubePlace.value,
+                tubeNumber: inputTubeNumber.value
+            },
+            success: function (data) {
+                $('#closeModal').click();
+            }
+        });
+
+        $.ajax({
+            url: 'Home/AddObject',
+            type: 'POST',
+            async: false,
+            data: {
+                lpuName: inputLPU.value,
+                tubeName: inputTube.value,
+                tubePart: inputTubePart.value,
+                tubePlace: inputTubePlace.value,
+                tubeNumber: inputTubeNumber.value
+            },
+            success: function (data) {
+                $('#closeModal').click();
+            }
+        });
+
+    })
+
+    $('#cancel').click(function (e) {
+        e.preventDefault();
+
+        $('#closeModal').click();
+    })
+</script>
+

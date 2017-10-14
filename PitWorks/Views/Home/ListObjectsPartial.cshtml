@@ -1,0 +1,31 @@
+﻿@*Частичное представление для списка объектов во вкладке "Объекты"*@
+@model IEnumerable<PitWorks.Models.Объект>
+
+<div class="nav" style="height:300px; max-height:300px; overflow:scroll">
+    @foreach (var obj in Model)
+    {
+        //Пройтись по всем дефектам в объекте, если все дефекты закрыты, то выделить серым
+        bool inWork = false;
+        foreach (var defect in obj.Дефект)
+        {
+            if (defect.id_признак_состояния == 0)
+            {
+                inWork = true;
+            }
+        }
+
+        if (inWork)
+        {
+            @Ajax.ActionLink(string.Format("ЛПУ: {0}; Газопровод имя: {1}; Участок МГ: {2}; № Трубы: {3}", obj.id_ЛПУ, obj.id_участка_газопровода, obj.Участок_МГ, obj.Номер_трубы),
+                        "ListDefectsPartial/" + obj.id, "Home", new AjaxOptions() { UpdateTargetId = "listDefects" }, new { @style = "color:darkblue" });
+        }
+        else
+        {
+            @Ajax.ActionLink(string.Format("+ ЛПУ: {0}; Газопровод имя: {1}; Участок МГ: {2}; № Трубы: {3}", obj.id_ЛПУ, obj.id_участка_газопровода, obj.Участок_МГ, obj.Номер_трубы),
+                        "ListDefectsPartial/" + obj.id, "Home", new AjaxOptions() { UpdateTargetId = "listDefects" }, new { @style = "color:gray" });
+           
+        }
+
+        <p></p>
+    }
+</div>

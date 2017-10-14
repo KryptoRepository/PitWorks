@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище PitDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Виды дефектов">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="Наименование" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Виды ремонта">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="Наименование" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Внутритрубная диагностика">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="id виды дефектов" Type="int" />
+    <Property Name="Ориент. дефекта" Type="int" />
+    <Property Name="Длина дефекта" Type="int" />
+    <Property Name="Ширина дефекта" Type="int" />
+    <Property Name="Глубина дефекта" Type="int" />
+    <Property Name="Срок НО по ВТД" Type="float" />
+    <Property Name="Дата проведения ВТД" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ДДО">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Номер МПР" Type="int" />
+    <Property Name="Номер акта НО" Type="int" />
+    <Property Name="Дата начала ДДО" Type="datetime" />
+    <Property Name="Дата окончания ДДО" Type="datetime" />
+    <Property Name="Разр. давление" Type="float" />
+    <Property Name="Срок ремонта" Type="float" />
+    <Property Name="id результаты ДДО" Type="int" />
+  </EntityType>
+  <EntityType Name="Дефект">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="id ВТД" Type="uniqueidentifier" />
+    <Property Name="id ДДО" Type="uniqueidentifier" />
+    <Property Name="id Ремонта" Type="uniqueidentifier" />
+    <Property Name="id признак состояния" Type="int" />
+    <Property Name="id объекта" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="ЛПУ">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Объект">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="id участка газопровода" Type="int" Nullable="false" />
+    <Property Name="Участок МГ" Type="varchar(max)" Nullable="false" />
+    <Property Name="Место" Type="float" Nullable="false" />
+    <Property Name="Номер трубы" Type="int" Nullable="false" />
+    <Property Name="id ЛПУ" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Пользователь">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Логин" Type="varchar(max)" Nullable="false" />
+    <Property Name="Пароль" Type="varchar(max)" Nullable="false" />
+    <Property Name="id уровня доступа" Type="int" Nullable="false" />
+    <Property Name="id ЛПУ" Type="int" />
+  </EntityType>
+  <EntityType Name="Признак состояния работы">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="Наименование" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Результаты ДДО">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="Наименование" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ремонт">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Дата начала" Type="datetime" />
+    <Property Name="Дата окончания" Type="datetime" />
+    <Property Name="id виды ремонта" Type="int" />
+    <Property Name="Примечание" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Уровни доступа">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="Наименование" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Участок газопровода">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Внутритрубная диагностика_Виды дефектов">
+    <End Role="Виды дефектов" Type="Self.Виды дефектов" Multiplicity="0..1" />
+    <End Role="Внутритрубная диагностика" Type="Self.Внутритрубная диагностика" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Виды дефектов">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Внутритрубная диагностика">
+        <PropertyRef Name="id виды дефектов" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ДДО_Результаты ДДО">
+    <End Role="Результаты ДДО" Type="Self.Результаты ДДО" Multiplicity="0..1" />
+    <End Role="ДДО" Type="Self.ДДО" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Результаты ДДО">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ДДО">
+        <PropertyRef Name="id результаты ДДО" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Дефект_Внутритрубная диагностика">
+    <End Role="Внутритрубная диагностика" Type="Self.Внутритрубная диагностика" Multiplicity="0..1" />
+    <End Role="Дефект" Type="Self.Дефект" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Внутритрубная диагностика">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Дефект">
+        <PropertyRef Name="id ВТД" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Дефект_ДДО">
+    <End Role="ДДО" Type="Self.ДДО" Multiplicity="0..1" />
+    <End Role="Дефект" Type="Self.Дефект" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ДДО">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Дефект">
+        <PropertyRef Name="id ДДО" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Дефект_Объект">
+    <End Role="Объект" Type="Self.Объект" Multiplicity="0..1" />
+    <End Role="Дефект" Type="Self.Дефект" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Объект">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Дефект">
+        <PropertyRef Name="id объекта" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Дефект_Признак состояния работы">
+    <End Role="Признак состояния работы" Type="Self.Признак состояния работы" Multiplicity="0..1" />
+    <End Role="Дефект" Type="Self.Дефект" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Признак состояния работы">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Дефект">
+        <PropertyRef Name="id признак состояния" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Дефект_Ремонт">
+    <End Role="Ремонт" Type="Self.Ремонт" Multiplicity="0..1" />
+    <End Role="Дефект" Type="Self.Дефект" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ремонт">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Дефект">
+        <PropertyRef Name="id Ремонта" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Объект_ЛПУ">
+    <End Role="ЛПУ" Type="Self.ЛПУ" Multiplicity="1" />
+    <End Role="Объект" Type="Self.Объект" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ЛПУ">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Объект">
+        <PropertyRef Name="id ЛПУ" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Объект_Участок газопровода">
+    <End Role="Участок газопровода" Type="Self.Участок газопровода" Multiplicity="1" />
+    <End Role="Объект" Type="Self.Объект" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Участок газопровода">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Объект">
+        <PropertyRef Name="id участка газопровода" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Пользователь_ЛПУ">
+    <End Role="ЛПУ" Type="Self.ЛПУ" Multiplicity="0..1" />
+    <End Role="Пользователь" Type="Self.Пользователь" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ЛПУ">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Пользователь">
+        <PropertyRef Name="id ЛПУ" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Пользователь_Уровни доступа">
+    <End Role="Уровни доступа" Type="Self.Уровни доступа" Multiplicity="1" />
+    <End Role="Пользователь" Type="Self.Пользователь" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Уровни доступа">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Пользователь">
+        <PropertyRef Name="id уровня доступа" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ремонт_Виды ремонта">
+    <End Role="Виды ремонта" Type="Self.Виды ремонта" Multiplicity="0..1" />
+    <End Role="Ремонт" Type="Self.Ремонт" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Виды ремонта">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Ремонт">
+        <PropertyRef Name="id виды ремонта" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище PitDBModelContainer">
+    <EntitySet Name="Виды дефектов" EntityType="Self.Виды дефектов" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Виды ремонта" EntityType="Self.Виды ремонта" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Внутритрубная диагностика" EntityType="Self.Внутритрубная диагностика" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ДДО" EntityType="Self.ДДО" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Дефект" EntityType="Self.Дефект" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ЛПУ" EntityType="Self.ЛПУ" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Объект" EntityType="Self.Объект" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Пользователь" EntityType="Self.Пользователь" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Признак состояния работы" EntityType="Self.Признак состояния работы" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Результаты ДДО" EntityType="Self.Результаты ДДО" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ремонт" EntityType="Self.Ремонт" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Уровни доступа" EntityType="Self.Уровни доступа" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Участок газопровода" EntityType="Self.Участок газопровода" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Внутритрубная диагностика_Виды дефектов" Association="Self.FK_Внутритрубная диагностика_Виды дефектов">
+      <End Role="Виды дефектов" EntitySet="Виды дефектов" />
+      <End Role="Внутритрубная диагностика" EntitySet="Внутритрубная диагностика" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ДДО_Результаты ДДО" Association="Self.FK_ДДО_Результаты ДДО">
+      <End Role="Результаты ДДО" EntitySet="Результаты ДДО" />
+      <End Role="ДДО" EntitySet="ДДО" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Дефект_Внутритрубная диагностика" Association="Self.FK_Дефект_Внутритрубная диагностика">
+      <End Role="Внутритрубная диагностика" EntitySet="Внутритрубная диагностика" />
+      <End Role="Дефект" EntitySet="Дефект" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Дефект_ДДО" Association="Self.FK_Дефект_ДДО">
+      <End Role="ДДО" EntitySet="ДДО" />
+      <End Role="Дефект" EntitySet="Дефект" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Дефект_Объект" Association="Self.FK_Дефект_Объект">
+      <End Role="Объект" EntitySet="Объект" />
+      <End Role="Дефект" EntitySet="Дефект" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Дефект_Признак состояния работы" Association="Self.FK_Дефект_Признак состояния работы">
+      <End Role="Признак состояния работы" EntitySet="Признак состояния работы" />
+      <End Role="Дефект" EntitySet="Дефект" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Дефект_Ремонт" Association="Self.FK_Дефект_Ремонт">
+      <End Role="Ремонт" EntitySet="Ремонт" />
+      <End Role="Дефект" EntitySet="Дефект" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Объект_ЛПУ" Association="Self.FK_Объект_ЛПУ">
+      <End Role="ЛПУ" EntitySet="ЛПУ" />
+      <End Role="Объект" EntitySet="Объект" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Объект_Участок газопровода" Association="Self.FK_Объект_Участок газопровода">
+      <End Role="Участок газопровода" EntitySet="Участок газопровода" />
+      <End Role="Объект" EntitySet="Объект" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Пользователь_ЛПУ" Association="Self.FK_Пользователь_ЛПУ">
+      <End Role="ЛПУ" EntitySet="ЛПУ" />
+      <End Role="Пользователь" EntitySet="Пользователь" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Пользователь_Уровни доступа" Association="Self.FK_Пользователь_Уровни доступа">
+      <End Role="Уровни доступа" EntitySet="Уровни доступа" />
+      <End Role="Пользователь" EntitySet="Пользователь" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ремонт_Виды ремонта" Association="Self.FK_Ремонт_Виды ремонта">
+      <End Role="Виды ремонта" EntitySet="Виды ремонта" />
+      <End Role="Ремонт" EntitySet="Ремонт" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
